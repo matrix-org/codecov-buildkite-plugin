@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ -f "$BUILDKITE_PLUGIN_CODECOV_PATH" ]]; then
+    echo "--- Uploading $BUILDKITE_PLUGIN_CODECOV_PATH to Codecov"
+
+    DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+
+    "$DIR/../codecov" upload -f $BUILDKITE_PLUGIN_CODECOV_PATH
+else
+    echo "--- Coverage report at $BUILDKITE_PLUGIN_CODECOV_PATH was not found, skipping"
+fi
