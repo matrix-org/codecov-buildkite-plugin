@@ -2,8 +2,8 @@ name: Codecov
 description: Uploads codecov reports
 author: https://github.com/matrix-org
 configuration:
-  properties:
+  parallel:
     path:
       type: string
   required:
-    - path
+    - parallel
