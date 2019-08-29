@@ -7,7 +7,7 @@ if [[ -f "$BUILDKITE_PLUGIN_CODECOV_PATH" ]]; then
 
     DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
-    "$DIR/../codecov" upload -f $BUILDKITE_PLUGIN_CODECOV_PATH
+    "$DIR/../codecov" upload -X gcov -X search -f $BUILDKITE_PLUGIN_CODECOV_PATH -B $BUILDKITE_BRANCH -C $BUILDKITE_COMMIT -P $BUILDKITE_PULL_REQUEST -b $BUILDKITE_BUILD_NUMBER
 else
     echo "--- Coverage report at $BUILDKITE_PLUGIN_CODECOV_PATH was not found, skipping"
 fi
