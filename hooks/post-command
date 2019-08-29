@@ -6,6 +6,6 @@ docker \
     --log-level "error" \
     run \
     --rm \
-    --volume "$pwd:/src" \
+    --volume "$(pwd):/src" \
     -e "COVERALLS_REPO_TOKEN" -e "BUILDKITE_BRANCH" -e "BUILDKITE_JOB_ID" -e "BUILDKITE" -e "COVERALLS_PARALLEL=${$BUILDKITE_PLUGIN_CODECOV_PARALLEL}" \
     python:3.6 /usr/bin/bash -c "pip install coveralls && cd /src && coveralls"
