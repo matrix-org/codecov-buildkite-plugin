@@ -10,7 +10,7 @@ if [[ -f "$BUILDKITE_PLUGIN_CODECOV_PATH" ]]; then
     echo "--- Uploading $BUILDKITE_PLUGIN_CODECOV_PATH to Codecov"
 
     DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
-    cd DIR
+    cd $DIR
 
     "$DIR/../codecov" upload -X gcov -X search -f $BUILDKITE_PLUGIN_CODECOV_PATH -B $BUILDKITE_BRANCH -C $BUILDKITE_COMMIT -P $BUILDKITE_PULL_REQUEST -b $BUILDKITE_BUILD_NUMBER
 else
