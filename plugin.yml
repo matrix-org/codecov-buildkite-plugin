@@ -1,5 +1,5 @@
-name: Codecov
-description: Uploads codecov reports
+name: Coveralls
+description: Uploads coveralls reports
 author: https://github.com/matrix-org
 configuration:
   parallel:

@@ -9,6 +9,6 @@ docker \
     --volume "$(pwd):/src" \
     -e "COVERALLS_REPO_TOKEN" -e "BUILDKITE_BRANCH" \
     -e "BUILDKITE_JOB_ID=$BUILDKITE_BUILD_NUMBER" -e "BUILDKITE" -e "BUILDKITE_PULL_REQUEST" \
-    -e "COVERALLS_PARALLEL=$BUILDKITE_PLUGIN_CODECOV_PARALLEL" \
+    -e "COVERALLS_PARALLEL=$BUILDKITE_PLUGIN_COVERALLS_PARALLEL" \
     -e "GIT_ID=$BUILDKITE_COMMIT" -e "TOP=/src" \
     python:3.6 /bin/sh -c "pip install coveralls coverage && cd /src && coveralls"
