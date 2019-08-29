@@ -2,18 +2,10 @@
 
 set -exuo pipefail
 
-PROJDIR="$(pwd)"
-
-pushd "$(pwd)"
-trap popd EXIT
-
-if [[ -f "$BUILDKITE_PLUGIN_CODECOV_PATH" ]]; then
-    echo "--- Uploading $BUILDKITE_PLUGIN_CODECOV_PATH to Codecov"
-
-    DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
-    cd $DIR/../
-
-    ./codecov -X gcov -X search -f "$PROJDIR/$BUILDKITE_PLUGIN_CODECOV_PATH" -B $BUILDKITE_BRANCH -C $BUILDKITE_COMMIT -P $BUILDKITE_PULL_REQUEST -b $BUILDKITE_BUILD_NUMBER
-else
-    echo "--- Coverage report at $BUILDKITE_PLUGIN_CODECOV_PATH was not found, skipping"
-fi
+docker \
+    --log-level "error" \
+    run \
+    --rm \
+    --volume "$pwd:/src" \
+    -e "COVERALLS_REPO_TOKEN" -e "BUILDKITE_BRANCH" -e "BUILDKITE_JOB_ID" -e "BUILDKITE"
+    python:3.6 /usr/bin/bash -c "pip install coveralls && cd /src && coveralls"
